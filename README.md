@@ -8,7 +8,7 @@ This work demonstrates the first exhaustive search for Kochen-Specker sets up to
 
 ### Key Contributions
 
-1. **SAT+nauty Framework**: A novel integration of SAT solving with nauty's graph canonization via Recursive Canonical Labeling (RCL), maintaining constant-time canonicity checks (~0.008s) regardless of graph size.
+1. **SAT+nauty Framework**: A novel integration of SAT solving with nauty's graph canonization via Recursive Canonical Labeling (RCL), maintaining fast canonicity checks on large graphs.
 
 2. **Exhaustive Enumeration**: Complete classification of all KS sets up to 33 rays extending the complete 25-ray SI-C set (1,641 CPU hours).
 
