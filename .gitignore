@@ -1,0 +1,98 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv
+
+# Compiled files
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+
+# Logs
+*.log
+*.out
+
+# SAT solver outputs
+*.cnf
+*.drat
+*.proof
+*.lrat
+*.trace
+*.sol
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.iml
+.project
+.classpath
+.settings/
+
+# Build artifacts
+build/
+bin/
+obj/
+*.class
+
+# March/cube outputs
+*.cubes
+
+# Specific temporary files
+null.cnf
+null_3.cnf
+null.drat
+ird
+candidates.txt
+steps
+example_vectors*.txt
+
+# Archives and compressed files (if temporary)
+*.tar.gz
+*.zip
+*.7z
+
+# Docker
+Dockerfile.tmp
+docker-compose.override.yml
+
+# System files
+.DS_Store
+Thumbs.db
+
