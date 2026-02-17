@@ -273,8 +273,8 @@ def verify_orthogonality_clause(o_clause: List[int],
     for edge_idx in edges:
         row, col = edge_index_to_vertex_pair(edge_idx, n)
         
-        v1_name = f"v{row + 1}"
-        v2_name = f"v{col + 1}"
+        v1_name = f"v{row}"
+        v2_name = f"v{col}"
         
         if v1_name not in vectors or v2_name not in vectors:
             continue
@@ -285,10 +285,10 @@ def verify_orthogonality_clause(o_clause: List[int],
         dot = dot_product(v1, v2)
         
         if verbose:
-            print(f"    Edge {edge_idx}: v{row+1}={v1} · v{col+1}={v2} = {dot}")
-        
+            print(f"    Edge {edge_idx}: v{row}={v1} · v{col}={v2} = {dot}")
+
         if dot != 0:
-            violations.append((edge_idx, row + 1, col + 1, dot))
+            violations.append((edge_idx, row, col, dot))
     
     if not violations:
         return False, "No orthogonality violations found"

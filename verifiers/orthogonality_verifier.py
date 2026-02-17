@@ -166,9 +166,9 @@ def verify_orthogonality_clause(clause: List[int],
     for edge_idx in edges:
         row, col = edge_index_to_vertex_pair(edge_idx, n)
         
-        # Get vector names (vertices are 0-indexed, but witness uses 1-indexed)
-        v1_name = f"v{row + 1}"
-        v2_name = f"v{col + 1}"
+        # Get vector names (solver writes 0-indexed vertex names)
+        v1_name = f"v{row}"
+        v2_name = f"v{col}"
         
         if v1_name not in vectors or v2_name not in vectors:
             if verbose:
@@ -181,10 +181,10 @@ def verify_orthogonality_clause(clause: List[int],
         dot = dot_product(v1, v2)
         
         if verbose:
-            print(f"  Edge {edge_idx}: v{row+1}={v1} · v{col+1}={v2} = {dot}")
-        
+            print(f"  Edge {edge_idx}: v{row}={v1} · v{col}={v2} = {dot}")
+
         if dot != 0:
-            violations.append((edge_idx, row + 1, col + 1, dot))
+            violations.append((edge_idx, row, col, dot))
     
     if not violations:
         return False, f"No orthogonality violations found! All edges connect orthogonal vertices."
@@ -192,7 +192,7 @@ def verify_orthogonality_clause(clause: List[int],
     if verbose:
         print(f"  ✓ Found {len(violations)} orthogonality violation(s):")
         for edge_idx, v1_idx, v2_idx, dot in violations:
-            print(f"    Edge {edge_idx} (v{v1_idx}, v{v2_idx}): dot product = {dot} ≠ 0")
+            print(f"    Edge {edge_idx} (v{v1_idx},v{v2_idx}): dot product = {dot} ≠ 0")
     
     return True, f"Valid: {len(violations)} orthogonality violations found"
 
