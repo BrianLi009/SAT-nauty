@@ -21,7 +21,7 @@ python3 run_sic25_search.py --order 28
 # Run search for order 33
 python3 run_sic25_search.py --order 33
 
-# Generate a DRAT proof
+# Run search for order 30 and generate a proof
 python3 run_sic25_search.py --order 30 --proof
 ```
 
