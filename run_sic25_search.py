@@ -99,27 +99,36 @@ def step2_add_sic25_constraints(base_cnf, output_dir):
         return False, None
 
 
-def step3_run_cadical(cnf_file, order, output_dir, partition=25, complex_mode=False):
+def step3_run_cadical(cnf_file, order, output_dir, partition=25, complex_mode=False, proof=False, binary=True):
     """Run CaDiCaL-RCL solver."""
     print_header("STEP 3: Running CaDiCaL-RCL solver")
-    
+
     vectors_file = "sic-25-vectors.txt"
-    
+
     if not Path(vectors_file).exists():
         print(f"✗ Vectors file '{vectors_file}' not found")
         return False
-    
+
     # Construct cadical command
     cmd = [
         "./cadical-rcl/build/cadical",
         cnf_file,
+    ]
+
+    if proof:
+        drat_file = str(Path(cnf_file).with_suffix(".drat"))
+        cmd.append(drat_file)
+        print(f"Proof file: {drat_file}")
+
+    cmd += [
         "--order", str(order),
         "--partition", str(partition),
         "--vectors-file", vectors_file,
+        f"--binary={'true' if binary else 'false'}",
         "--unembeddable-check", "0",
         "--ortho"
     ]
-    
+
     if complex_mode:
         cmd.append("--complex")
     
@@ -185,6 +194,10 @@ Examples:
                        help='Starting partition size (default: 25 for SI-C)')
     parser.add_argument('--complex', action='store_true',
                        help='Use complex arithmetic')
+    parser.add_argument('--proof', action='store_true',
+                       help='Generate DRAT proof file')
+    parser.add_argument('--binary', action='store_true',
+                       help='Use binary proof format (default: text DRAT)')
     parser.add_argument('--skip-generation', action='store_true',
                        help='Skip CNF generation if file exists')
     
@@ -211,11 +224,13 @@ Examples:
     
     # Step 3: Run CaDiCaL
     success = step3_run_cadical(
-        cnf_with_sic, 
-        args.order, 
+        cnf_with_sic,
+        args.order,
         args.output_dir,
         args.partition,
-        args.complex
+        args.complex,
+        args.proof,
+        binary=args.binary
     )
     if not success:
         print("\n✗ Workflow failed at step 3")
