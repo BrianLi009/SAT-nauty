@@ -99,7 +99,7 @@ def step2_add_sic25_constraints(base_cnf, output_dir):
         return False, None
 
 
-def step3_run_cadical(cnf_file, order, output_dir, partition=25, complex_mode=False, proof=False, binary=True):
+def step3_run_cadical(cnf_file, order, output_dir, partition=25, complex_mode=False, proof=False, binary=False):
     """Run CaDiCaL-RCL solver."""
     print_header("STEP 3: Running CaDiCaL-RCL solver")
 
